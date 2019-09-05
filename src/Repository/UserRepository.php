@@ -47,4 +47,10 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function createUserQueryBuilder()
+    {
+        return $this->createQueryBuilder('user');
+    }
+
 }

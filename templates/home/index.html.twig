@@ -1,7 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
-Home Page
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-succes">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% if is_granted('ROLE_USER') %}
+        <a href = "{{ path('app_conference_new') }}">New Conference</a>
+    {% endif %}
+
+    {% for c in conference %}
+        <a href = "{{ path('app_conference_id', {id : c.id}) }}">
+            <div>
+                <ul>
+                    <li>
+                        {{ c.title }}
+                    </li>
+                    <li>
+                        {{ c.description }}
+                    </li>
+                    <li>
+                        {{ c.createdAt|date() }}
+                    </li>
+                    <li>
+                        {{ c.user.firstname }} {{ c.user.lastname }}
+                    </li>
+                </ul>
+            </div>
+        </a>
+    {% endfor %}
 {% endblock %}
