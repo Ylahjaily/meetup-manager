@@ -89,11 +89,13 @@ class Conference
     {
         return $this->user;
     }
+
     public function setUser($user): self
     {
         $this->user = $user;
         return $this;
     }
+
     public function addUser($user)
     {
         $this->user[] = $user;
