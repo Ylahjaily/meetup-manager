@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <a href="{{ path('app_users_admin') }}">
+        <button>Back</button>
+    </a>
+
+    <a href="{{ path('app_admin') }}">
+        <button>Dashboard</button>
+    </a>
+
+    <div>
+        <ul>
+            <li>{{ user.firstname }} {{ user.lastname }}</li>
+            <li>{{ user.email }}</li>
+        </ul>
+    </div>
+{% endblock %}

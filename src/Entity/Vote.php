@@ -31,7 +31,7 @@ class Vote
     private $user;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer")
      */
     private $value;
 
@@ -72,7 +72,7 @@ class Vote
         $this->user[] = $user;
     }
 
-    public function getValue(): ?bool
+    public function getValue(): int
     {
         return $this->value;
     }
