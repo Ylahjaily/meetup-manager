@@ -12,21 +12,24 @@
         <a href = "{{ path('app_conference_new') }}">New Conference</a>
     {% endif %}
 
-    {% for c in conference %}
-        <a href = "{{ path('app_conference_id', {id : c.id}) }}">
+    {% for conference in conferences %}
+        <a href = "{{ path('app_conference_id', {id : conference.id}) }}">
             <div>
                 <ul>
                     <li>
-                        {{ c.title }}
+                        {{ conference.title }}
                     </li>
                     <li>
-                        {{ c.description }}
+                        {{ conference.description }}
                     </li>
                     <li>
-                        {{ c.createdAt|date() }}
+                        {{ conference.createdAt|date() }}
                     </li>
                     <li>
-                        {{ c.user.firstname }} {{ c.user.lastname }}
+                        {{ conference.user.firstname }} {{ conference.user.lastname }}
+                    </li>
+                    <li>
+                        {{ average[conference.id]}}
                     </li>
                 </ul>
             </div>

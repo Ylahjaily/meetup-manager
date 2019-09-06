@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 
@@ -29,28 +30,27 @@ class Vote
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $value;
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getConference()
+    public function getConference(): ?Conference
     {
         return $this->conference;
     }
 
-    public function setConference($conference): self
+    public function setConference(?Conference $conference): self
     {
         $this->conference = $conference;
-        return $this;
-    }
 
-    public function addConference($conference)
-    {
-        $this->conference[] = $conference;
+        return $this;
     }
 
     /**
@@ -72,4 +72,15 @@ class Vote
         $this->user[] = $user;
     }
 
+    public function getValue(): ?bool
+    {
+        return $this->value;
+    }
+
+    public function setValue(bool $value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
 }

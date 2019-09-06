@@ -14,10 +14,31 @@ class HomeController extends AbstractController
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Conference::class);
-        $conference = $repository->findAll();
+        $conferences = $repository->findAll();
+
+        $averageNote = [];
+        foreach ($conferences as $conference)
+        {
+            $values = [];
+            $votes = $conference->getVotes();
+            foreach ($votes as $vote)
+            {
+                $values[] = $vote->getValue();
+            }
+            if (!empty($values))
+            {
+                $average = array_sum($values)/count($values);
+                $averageNote[$conference->getId()] = $average;
+            }
+            else
+            {
+                $averageNote[$conference->getId()] = "not yet rated";
+            }
+        }
 
         return $this->render('home/index.html.twig', [
-            'conference' => $conference
+            'conferences' => $conferences,
+            'average' => $averageNote
         ]);
     }
 }

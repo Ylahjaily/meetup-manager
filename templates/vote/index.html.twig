@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for v in vote %}
+        <div>
+            <ul>
+                <li>{{ v.conference.title }}</li>
+                <li>{{ v.conference.description }}</li>
+                <li>{{ v.conference.user.firstname }}</li>
+                <li>{{ v.conference.user.lastname }}</li>
+                <li>{{ v.conference.createdAt|date() }}</li>
+            </ul>
+        </div>
+    {% endfor %}
+
+{% endblock %}

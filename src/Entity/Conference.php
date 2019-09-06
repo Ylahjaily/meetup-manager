@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 
@@ -38,9 +40,15 @@ class Conference
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="conference")
+     */
+    private $votes;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('UTC');
+        $this->vote = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,6 +107,22 @@ class Conference
     public function addUser($user)
     {
         $this->user[] = $user;
+    }
+
+    /**
+     * @return Collection|Vote[]
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): self
+    {
+        $this->votes[] = $vote;
+        $vote->setConference($this);
+
+        return $this;
     }
 
 }
