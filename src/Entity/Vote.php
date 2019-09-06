@@ -20,13 +20,13 @@ class Vote
 
     /**
      * @ORM\ManyToOne(targetEntity="Conference")
-     * @JoinColumn(name="conference_id", referencedColumnName="id")
+     * @JoinColumn(name="conference_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $conference;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
+     * @JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $user;
 
@@ -34,7 +34,6 @@ class Vote
      * @ORM\Column(type="integer")
      */
     private $value;
-
 
     public function getId(): ?int
     {

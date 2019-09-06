@@ -11,10 +11,18 @@
         <a href = "{{ path('app_user_id_admin', {id: user.id}) }}">
             <div>
                 <ul>
-
                     <li>{{ user.firstname }} <li>{{ user.lastname }}</li></li>
                     <li>{{ user.email }}</li>
-
+                    <a href = "{{ path('app_user_remove_admin', {id : user.id}) }}">
+                        <button>
+                            delete
+                        </button>
+                    </a>
+                    <a href = "{{ path('app_user_edit_admin', {id : user.id}) }}">
+                        <button>
+                            edit
+                        </button>
+                    </a>
                 </ul>
             </div>
         </a>

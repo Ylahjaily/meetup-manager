@@ -10,7 +10,9 @@
             <li>{{ conference.title }}</li>
             <li>{{ conference.description }}</li>
             <li>{{ conference.createdAt|date() }}</li>
-            <li>{{ conference.user.firstname }} {{ conference.user.lastname }}</li>
+            {% if conference.user.id != null %}
+                <li>{{ conference.user.firstname }} {{ conference.user.lastname }}</li>
+            {% endif %}
         </ul>
     </div>
 
