@@ -200,9 +200,12 @@
     "symfony/inflector": {
         "version": "v4.3.4"
     },
+<<<<<<< HEAD
     "symfony/intl": {
         "version": "v4.3.4"
     },
+=======
+>>>>>>> Master
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
