@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Conference;
 use App\Entity\User;
+use App\Entity\Vote;
 use App\Form\ConferenceFormType;
+use App\Form\VoteFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,11 +41,13 @@ class ConferenceController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/conference/{id}", name="app_conference_id")
      * @ParamConverter("conference", class="App\Entity\Conference")
      */
-    public function getOneConference(Conference $conference)
+    public function getOneConference(Conference $conference, Request $request, EntityManagerInterface $em)
     {
 
         if(is_null($conference))
@@ -50,8 +55,23 @@ class ConferenceController extends AbstractController
             throw new NotFoundHttpException();
         }
 
+        $vote = new Vote();
+        $form = $this->createForm(VoteFormType::class,$vote);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $vote->setUser($this->getUser());
+
+            $vote->setConference($conference);
+            $conference->addVote($vote);
+            $em->persist($vote);
+            $em->flush();
+            return $this->redirectToRoute('home');
+        }
+
         return $this->render('conference/conference_id.html.twig',[
-            'conference' => $conference
+            'conference' => $conference,
+            'form' => $form->createView()
         ]);
     }
 

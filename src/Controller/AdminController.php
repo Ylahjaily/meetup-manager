@@ -6,6 +6,7 @@ use App\Entity\Conference;
 use App\Entity\User;
 use App\Form\ConferenceFormType;
 use App\Form\UserRegisterType;
+use App\Repository\ConferenceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -146,6 +147,69 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
             'conference' => $user
         ]);
+    }
+
+    /**
+     * @Route("/admin/conferencetop", name ="app_conference_top_admin")
+     */
+    public function getTopConferences(ConferenceRepository $conferenceRepository)
+    {
+        $top10 = [];
+        $conferences = [];
+        $conf = $conferenceRepository->findAll();
+        foreach ($conf as $conference) {
+            $votes = $conference->getVotes();
+            $id = $conference->getid();
+            $title = $conference->getTitle();
+            $description = $conference->getDescription();
+            $createdAt = $conference->getCreatedAt();
+            $user = $conference->getUser();
+
+            foreach ($votes as $vote)
+            {
+                $values[] = $vote->getValue();
+            }
+            if (!empty($values))
+            {
+                $average = array_sum($values)/count($values);
+                $averageNote[$conference->getId()] = $average;
+            }
+
+            $conferences[] = [
+                'id' => $id,
+                'title' => $title,
+                'description' => $description,
+                'createdAt' => $createdAt,
+                'user' => $user,
+                'conference' => $conference,
+                'votes' => $votes
+            ];
+        }
+        usort($conferences, function($a, $b) {
+            return $b['votes'] <=> $a['votes'];
+        });
+        for($i = 0; $i < 10; $i++) {
+            $top10[$i] = $conferences[$i];
+        }
+        return $this->render('admin/conference_top.html.twig', [
+            'conferences' => $top10,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/conferencesunrated", name="app_admin_conference_unrated")
+     */
+    public function getUnratedConferences()
+    {
+        return $this->render('admin/conference_unrated.html.twig');
+    }
+
+    /**
+     * @Route("/admin/conferencesrated", name="app_admin_conference_rated")
+     */
+    public function getRatedConferences()
+    {
+        return $this->render('admin/conference_rated.html.twig');
     }
 
 }

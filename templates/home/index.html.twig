@@ -8,13 +8,10 @@
         </div>
     {% endfor %}
 
-    {% if is_granted('ROLE_USER') %}
-        <a href = "{{ path('app_conference_new') }}">New Conference</a>
-    {% endif %}
 
     {% for conference in conferences %}
         <a href = "{{ path('app_conference_id', {id : conference.id}) }}">
-            <div>
+            <div class = "card">
                 <ul>
                     <li>
                         {{ conference.title }}

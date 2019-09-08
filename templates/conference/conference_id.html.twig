@@ -5,7 +5,7 @@
     <a href="{{ path('home') }}">
         <button>Back</button>
     </a>
-    <div>
+    <div class = "detail">
         <ul>
             <li>{{ conference.title }}</li>
             <li>{{ conference.description }}</li>
@@ -14,7 +14,17 @@
                 <li>{{ conference.user.firstname }} {{ conference.user.lastname }}</li>
             {% endif %}
         </ul>
+            <div>
+            {% if is_granted('ROLE_USER') %}
+                {{ form_start(form) }}
+
+                {{ form_end(form) }}
+            {% endif %}
+            </div>
+
     </div>
+
+
 
     {% if app.user != null %}
 

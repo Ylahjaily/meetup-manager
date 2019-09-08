@@ -10,7 +10,7 @@
 
     {% for conference in conferences %}
         <a href = "{{ path('app_conference_id_admin', {id : conference.id}) }}">
-            <div>
+            <div class = "card">
                 <ul>
                     <li>
                         {{ conference.title }}
@@ -25,7 +25,7 @@
                         {{ conference.user.firstname }} {{ conference.user.lastname }}
                     </li>
                     <li>
-                        {{ average[conference.id]}}
+                       Note :  {{ average[conference.id]}}
                     </li>
                     <li>
                         <a href = "{{ path("app_conference_remove", {id :conference.id}) }}">

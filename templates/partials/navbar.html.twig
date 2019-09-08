@@ -1,0 +1,21 @@
+<nav>
+
+        <a href = "{{ path('home') }}"><button>Home</button></a>
+        <a href = "{{ path('app_login') }}"><button>Login</button></a>
+        <a href = "{{ path('register') }}"><button>Sign in</button></a>
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('app_logout') }}"><button>Logout</button></a>
+        {% endif %}
+
+         {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_admin') }}"><button>Admin dashboard</button></a>
+         {% elseif is_granted('ROLE_USER') %}
+            {{ app.user.firstname }}
+         {% else %}
+            Sign in to add conferences and vote
+         {% endif %}
+        {% if is_granted('ROLE_USER') %}
+            <a href = "{{ path('app_conference_new') }}"><button>New conference</button></a>
+        {% endif %}
+
+</nav>

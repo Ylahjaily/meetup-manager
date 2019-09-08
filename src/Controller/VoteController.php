@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Conference;
 use App\Entity\Vote;
+use App\Form\ConferenceFormType;
+use App\Form\VoteFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class VoteController extends AbstractController
@@ -20,4 +25,6 @@ class VoteController extends AbstractController
             'vote' => $vote
         ]);
     }
+
+
 }

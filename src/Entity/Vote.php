@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VoteRepository")
@@ -26,12 +27,17 @@ class Vote
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $user;
 
     /**
      * @ORM\Column(type="integer")
+     * Assert\Number
+     * Assert\Range(
+     *  min=0,
+     *  max=1
+     * )
      */
     private $value;
 
@@ -71,12 +77,12 @@ class Vote
         $this->user[] = $user;
     }
 
-    public function getValue(): int
+    public function getValue(): ?int
     {
         return $this->value;
     }
 
-    public function setValue(bool $value): self
+    public function setValue($value)
     {
         $this->value = $value;
 

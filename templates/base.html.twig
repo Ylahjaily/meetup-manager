@@ -3,10 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Community Event Manager{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            
+        {% endblock %}
     </head>
     <body>
+        {% block navbar %}
+            {% include('partials/navbar.html.twig') %}
+        {% endblock %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <script src = "/{{ asset('build/runtime.js') }}"></script>
+            <script src = "/{{ asset('build/app.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

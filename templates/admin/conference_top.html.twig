@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('app_admin') }}">
+        <button>Dashboard</button>
+    </a>
+
+    <a href = "{{ path('app_admin') }}">
+        <button>Back</button>
+    </a>
+
+    <h1>Top 10 conferences</h1>
+
+    {% for conference in conferences %}
+        <a href = "{{ path('app_conference_id_admin', {id : conference.id}) }}">
+            <div>
+                <ul>
+                    <li>
+                        {{ conference.title }}
+                    </li>
+                    <li>
+                        {{ conference.description }}
+                    </li>
+                    <li>
+                        {{ conference.createdAt|date() }}
+                    </li>
+
+                    <li>
+                        {{ conference.user.firstname }} {{ conference.user.lastname }}
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                        <a href = "{{ path("app_conference_remove", {id :conference.id}) }}">
+                            <button>Delete</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href = "{{ path("app_conference_edit", {id :conference.id}) }}">
+                            <button>Edit</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </a>
+    {% endfor %}
+
+{% endblock %}

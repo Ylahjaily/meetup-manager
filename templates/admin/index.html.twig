@@ -16,9 +16,30 @@
             </a>
         </li>
         <li>
-            Conference ranking
+            <a href = "{{ path('app_conference_top_admin') }}">
+                <button>Top conferences</button>
+            </a>
         </li>
-    </ul>
 
+        <li>
+            <a href = "{{ path('app_admin_conference_rated') }}">
+                <button>See  rated conferences</button>
+            </a>
+        </li>
+
+        <li>
+            <a href = "{{ path('app_admin_conference_unrated') }}">
+                <button>See  unrated conferences</button>
+            </a>
+        </li>
+
+        <li>
+            <a href = "{{ path('app_vote') }}">
+                <button>See votes</button>
+            </a>
+        </li>
+
+
+    </ul>
 
 {% endblock %}
