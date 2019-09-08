@@ -1,0 +1,9 @@
+Installation
+git clone https://github.com/Ylahjaily/commuty-event-manager
+docker-compose up -d
+docker-compose exec web php bin/console doctrine:database:create
+docker-compose exec web php bin/console d:s:u --force
+docker-compose exec web php bin/console doctrine:fixtures:load
+docker-compose exec web php bin/console app:create-admin <your firstname> <your lastname> <your email> <your password>
+
+Naviguate to website at "localhost:81"
