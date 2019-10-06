@@ -11,7 +11,7 @@
 
     {% for conference in conferences %}
         <a href = "{{ path('app_conference_id', {id : conference.id}) }}">
-            <div class = "card">
+            <div class ="alert alert-primary" role="alert">
                 <ul>
                     <li>
                         {{ conference.title }}
