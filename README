@@ -1,10 +1,16 @@
-Installation
+ DESCRIPTION 
+Web application with a collection of tools helping people organising community events
+
+
+ INSTALATION 
 git clone https://github.com/Ylahjaily/meetup-manager
 docker-compose up -d
 docker-compose exec web composer install
 docker-compose exec web php bin/console doctrine:database:create
 docker-compose exec web php bin/console d:s:u --force
 docker-compose exec web php bin/console doctrine:fixtures:load
+
+CREATE ADMIN
 docker-compose exec web php bin/console app:create-admin <your firstname> <your lastname> <your email> <your password>
 
 Naviguate to website at "localhost:81"
